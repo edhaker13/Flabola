@@ -15,6 +15,9 @@ namespace Flabola
 		private static int screenWidth, screenHeight;
 		private static int playerScore;
 		private static bool quit;
+		private static MenuUI menuUI;
+		private static GameUI gameUI;
+		//private static HighscoreUI highscoreUI;
 		
 		public static void Main(string[] args)
 		{
@@ -38,7 +41,17 @@ namespace Flabola
 			get{ return quit; }
 			set{ quit = value; }
 		}
-
+		
+		public static MenuUI MenuScene
+		{
+			get{ return menuUI; }
+		}
+		
+		public static GameUI GameScene
+		{
+			get{ return gameUI; }
+		}
+		
 		public static void Initialize()
 		{
 			// Initial player score
@@ -50,6 +63,14 @@ namespace Flabola
 			// Retrieve screen width and height
 			screenWidth = UISystem.FramebufferWidth;
 			screenHeight = UISystem.FramebufferHeight;
+			// Create menu scene
+			menuUI = new MenuUI();
+			
+			// Create game scene
+			gameUI = new GameUI();
+			
+			// Set initial scene
+			UISystem.SetScene(menuUI, null);
 		}
 
 		public static void Update()
