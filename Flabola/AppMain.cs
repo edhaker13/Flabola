@@ -23,7 +23,7 @@ namespace Flabola
 		{
 			Initialize ();
 
-			while (!quit)
+			while (!Quit)
 			{
 				SystemEvents.CheckEvents ();
 				Update ();
@@ -34,6 +34,7 @@ namespace Flabola
 		public static int PlayerScore
 		{
 			get{ return playerScore; }
+			set{ playerScore = value; }
 		}
 		
 		public static bool Quit
