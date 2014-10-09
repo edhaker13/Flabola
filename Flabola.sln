@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flabola", "Flabola.csproj", "{A59116AD-D43F-402E-8711-B86965B09EC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A59116AD-D43F-402E-8711-B86965B09EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59116AD-D43F-402E-8711-B86965B09EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59116AD-D43F-402E-8711-B86965B09EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59116AD-D43F-402E-8711-B86965B09EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Flabola.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = null
+		$2.scope = text/x-cgsrc
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.TabWidth = 4
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/plain
+		$3.scope = text/plain
+		$0.TextStylePolicy = $4
+		$4.inheritsSet = null
+		$4.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $5
+		$5.BeforeMethodDeclarationParentheses = False
+		$5.BeforeConstructorDeclarationParentheses = False
+		$5.BeforeIndexerDeclarationBracket = False
+		$5.BeforeDelegateDeclarationParentheses = False
+		$5.NewParentheses = False
+		$5.IfParentheses = False
+		$5.WhileParentheses = False
+		$5.ForParentheses = False
+		$5.ForeachParentheses = False
+		$5.CatchParentheses = False
+		$5.SwitchParentheses = False
+		$5.LockParentheses = False
+		$5.UsingParentheses = False
+		$5.SpacesBeforeBrackets = False
+		$5.inheritsSet = Mono
+		$5.inheritsScope = text/x-csharp
+		$5.scope = text/x-csharp
+		$0.StandardHeader = $6
+		$6.Text = 
+		$6.IncludeInNewFiles = True
+	EndGlobalSection
+EndGlobal
