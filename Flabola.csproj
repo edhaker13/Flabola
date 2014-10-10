@@ -35,6 +35,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Sce.PlayStation.Core" />
     <Reference Include="Sce.PlayStation.HighLevel.UI" />
+    <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\exit.png" />
@@ -43,6 +44,9 @@
     <Content Include="assets\player-sprite.png" />
     <Content Include="assets\player-spritemap-v9-greypants.png" />
     <Content Include="assets\player-spritemap.png" />
+    <Content Include="assets\background.png" />
+    <Content Include="assets\bottompipe.png" />
+    <Content Include="assets\toppipe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
   <ItemGroup>
@@ -63,5 +67,9 @@
     <Compile Include="AppMain.cs" />
     <Compile Include="GameUI.cs" />
     <Compile Include="MenuUI.cs" />
+    <Compile Include="GameScene.cs" />
+    <Compile Include="Background.cs" />
+    <Compile Include="Obstacle.cs" />
+    <Compile Include="Player.cs" />
   </ItemGroup>
 </Project>

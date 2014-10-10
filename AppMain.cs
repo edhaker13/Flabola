@@ -1,34 +1,97 @@
 using System;
 using System.Collections.Generic;
 
-using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 
+using Sce.PlayStation.HighLevel.GameEngine2D;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
+using Sce.PlayStation.HighLevel.UI;
+
 namespace Flabola
 {
 	public class AppMain
 	{
-		private static GraphicsContext graphics;
 		private static int screenWidth, screenHeight;
 		private static int playerScore;
 		private static bool quit;
 		private static MenuUI menuUI;
 		private static GameUI gameUI;
 		//private static HighscoreUI highscoreUI;
+		private static GameScene gameScene;
 		
 		public static void Main(string[] args)
 		{
-			Initialize ();
+			Initialize();
 
-			while (!Quit)
-			{
-				SystemEvents.CheckEvents ();
-				Update ();
-				Render ();
+			while(!Quit) {
+				SystemEvents.CheckEvents();
+				Update();
+				Render();
 			}
+			/* Cleanup
+			player.Dispose();
+			foreach(Obstacle obstacle in obstacles)
+			{
+				obstacle.Dispose();
+			}
+			background.Dispose();*/
+			Director.Terminate();
+			UISystem.Terminate();
+		}
+		
+		public static void Initialize()
+		{
+			// Initial player score
+			playerScore = 0;
+			//Set up director
+			Director.Initialize();
+			// Initialize UI system
+			UISystem.Initialize(Director.Instance.GL.Context);
+			// Set up game scene
+			gameScene = new GameScene();
+			
+			// Retrieve screen width and height
+			screenWidth = UISystem.FramebufferWidth;
+			screenHeight = UISystem.FramebufferHeight;
+			
+			// Create menu scene
+			menuUI = new MenuUI();
+			// Create game scene
+			gameUI = new GameUI();
+			// Set initial scene
+			UISystem.SetScene(gameUI, null);
+			//Run the scene.
+			Director.Instance.RunWithScene(gameScene, true);
+		}
+
+		public static void Update()
+		{
+			// Query gamepad for current state
+			var gamePadData = GamePad.GetData(0);
+			// Query touch for current state
+			List<TouchData> touchDataList = Touch.GetData(0);
+			
+			// Update scene director
+			Director.Instance.Update();
+			
+			gameScene.Update();
+
+			// Update UI Toolkit
+			UISystem.Update(touchDataList);
+		}
+
+		public static void Render()
+		{
+			// Render with the scene director
+			Director.Instance.Render();
+			// Render the UI screen
+			UISystem.Render();
+			// Present the screen (via director)
+			Director.Instance.GL.Context.SwapBuffers();
+			Director.Instance.PostSwap();
 		}
 		
 		public static int PlayerScore
@@ -43,68 +106,41 @@ namespace Flabola
 			set{ quit = value; }
 		}
 		
-		public static MenuUI MenuScene
+		public static MenuUI MenuSceneUI
 		{
 			get{ return menuUI; }
 		}
 		
-		public static GameUI GameScene
+		public static GameUI GameSceneUI
 		{
 			get{ return gameUI; }
 		}
 		
-		public static void Initialize()
+		public static GameScene GameScene
 		{
-			// Initial player score
-			playerScore = 0;
-			// Set up the graphics system
-			graphics = new GraphicsContext ();
-			// Initialize UI system
-			UISystem.Initialize(graphics);
-			// Retrieve screen width and height
-			screenWidth = UISystem.FramebufferWidth;
-			screenHeight = UISystem.FramebufferHeight;
-			// Create menu scene
-			menuUI = new MenuUI();
-			
-			// Create game scene
-			gameUI = new GameUI();
-			
-			// Set initial scene
-			UISystem.SetScene(menuUI, null);
-		}
-
-		public static void Update()
-		{
-			// Query gamepad for current state
-			var gamePadData = GamePad.GetData (0);
-			// Query touch for current state
-            List<TouchData> touchDataList = Touch.GetData (0);
-
-            // Update UI Toolkit
-            UISystem.Update(touchDataList);
-		}
-
-		public static void Render()
-		{
-			// Clear the screen
-			graphics.SetClearColor (0.0f, 0.0f, 0.0f, 0.0f);
-			graphics.Clear ();
-			// Render the UI screen
-			UISystem.Render();
-			// Present the screen
-			graphics.SwapBuffers ();
+			get{ return gameScene; }
+			set{ gameScene = value; }
 		}
 		
-	    private static bool InsideRect(float pixelX, float pixelY, Rectangle hitTestArea)
-	    {
+		public static int ScreenWidth
+		{
+			get{ return screenWidth; }
+		}
+		
+		public static int ScreenHeight
+		{
+			get{ return screenHeight; }
+		}
+		
+		private static bool InsideRect(float pixelX, float pixelY, Rectangle hitTestArea)
+		{
 			
-	        if (hitTestArea.X <= pixelX && hitTestArea.X + hitTestArea.Width >= pixelX &&
+			if(hitTestArea.X <= pixelX && hitTestArea.X + hitTestArea.Width >= pixelX &&
 	            hitTestArea.Y <= pixelY && hitTestArea.Y + hitTestArea.Height >= pixelY) {
-	            return true;
-	        }
+				return true;
+			}
 	
-	        return false;
-	    }
+			return false;
+		}
 	}
 }

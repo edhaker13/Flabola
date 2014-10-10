@@ -1,8 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AppMain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameScene.cs">
     <Files>
-      <File FileName="AppMain.cs" Line="20" Column="44" />
+      <File FileName="AppMain.cs" Line="65" Column="36" />
+      <File FileName="MenuUI.cs" Line="26" Column="45" />
+      <File FileName="GameUI.cs" Line="29" Column="4" />
+      <File FileName="GameScene.cs" Line="33" Column="7" />
+      <File FileName="Player.cs" Line="68" Column="3" />
+      <File FileName="Obstacle.cs" Line="9" Column="18" />
+      <File FileName="Background.cs" Line="19" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
