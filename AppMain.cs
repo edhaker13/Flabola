@@ -50,12 +50,12 @@ namespace Flabola
 			Director.Initialize();
 			// Initialize UI system
 			UISystem.Initialize(Director.Instance.GL.Context);
-			// Set up game scene
-			gameScene = new GameScene();
-			
 			// Retrieve screen width and height
 			screenWidth = UISystem.FramebufferWidth;
 			screenHeight = UISystem.FramebufferHeight;
+			
+			// Set up game scene
+			gameScene = new GameScene();
 			
 			// Create menu scene
 			menuUI = new MenuUI();

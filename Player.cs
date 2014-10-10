@@ -8,43 +8,65 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace Flabola
 {
+	public enum MoveStatus
+	{
+		Disabled = 0,
+		Up,
+		Down
+	}
+	
 	public class Player
 	{
 		// Private variables.
 		private static SpriteTile sprite;
 		private static TextureInfo textureInfo;
-		private static float pushAmount = 5.0f;
-		private static float maxPushAmount = 100.0f;
-		private static float yPositionBeforePush;
-		private static bool isAlive, isRising;
+		private static readonly float pushAmount = 5.0f;
+		private static readonly float maxPushAmount = 100.0f;
+		private static float yPositionBeforePush, rotateAngle;
+		private static bool isAlive;
+		private static MoveStatus moveState;
 		
 		// Public functions.
 		public Player(Scene scene)
 		{
 			textureInfo = new TextureInfo("/Application/assets/player-sprite.png");
-			isAlive = true;
-			isRising = false;
 			sprite = new SpriteTile(textureInfo);
-			sprite.Position = new Vector2(AppMain.ScreenWidth * .2f, AppMain.ScreenHeight * .3f);
+			sprite.Position = new Vector2(AppMain.ScreenWidth * .2f, AppMain.ScreenHeight * .5f);
 			sprite.Quad.S = textureInfo.TextureSizef * 2.0f;
 			sprite.Pivot = new Vector2(.5f, .5f);
+			isAlive = true;
+			moveState = MoveStatus.Disabled;
+			rotateAngle = .0f;
 			
 			sprite.Schedule( (dt) =>
             {
 				Vector2 pos = sprite.Position;
-				Vector2 size = new Vector2(sprite.Quad.S.X, sprite.Quad.S.X);
+				// Check collision with floor
+				if(pos.Y < 0)
+				{
+					IsAlive = false;
+					return;
+				}
 				// Adjust jump
-				if(isRising)
+				switch(moveState)
 				{
+				case MoveStatus.Up:
 					if((pos.Y - yPositionBeforePush) < maxPushAmount)
+					{
 						sprite.Position = new Vector2(pos.X, pos.Y + pushAmount);
+						rotateAngle = dt;
+					}
 					else
-						isRising = false;
-				}
-				else
-				{
+					{
+						moveState = MoveStatus.Down;
+					}
+					break;
+				case MoveStatus.Down:
 					sprite.Position = new Vector2(pos.X, pos.Y - pushAmount);
+					rotateAngle = -dt;
+					break;
 				}
+				sprite.Rotate(rotateAngle);
 			});
 			// Add to the current scene.
 			scene.AddChild(sprite);
@@ -63,8 +85,8 @@ namespace Flabola
 		
 		public void Tapped()
 		{
-			if(!isRising) {
-				isRising = true;
+			if(moveState != MoveStatus.Up) {
+				moveState = MoveStatus.Up;
 				yPositionBeforePush = sprite.Position.Y;
 			}
 		}
