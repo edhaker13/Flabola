@@ -17,10 +17,10 @@ namespace Flabola
 		private static int screenWidth, screenHeight;
 		private static int playerScore;
 		private static bool quit;
-		private static MenuUI menuUI;
-		private static GameUI gameUI;
+		//private static MenuUI menuUI;
+		//private static GameUI gameUI;
 		//private static HighscoreUI highscoreUI;
-		private static GameScene gameScene;
+		//private static GameScene gameScene;
 		
 		public static void Main(string[] args)
 		{
@@ -31,13 +31,6 @@ namespace Flabola
 				Update();
 				Render();
 			}
-			/* Cleanup
-			player.Dispose();
-			foreach(Obstacle obstacle in obstacles)
-			{
-				obstacle.Dispose();
-			}
-			background.Dispose();*/
 			Director.Terminate();
 			UISystem.Terminate();
 		}
@@ -53,18 +46,10 @@ namespace Flabola
 			// Retrieve screen width and height
 			screenWidth = UISystem.FramebufferWidth;
 			screenHeight = UISystem.FramebufferHeight;
-			
-			// Set up game scene
-			gameScene = new GameScene();
-			
-			// Create menu scene
-			menuUI = new MenuUI();
-			// Create game scene
-			gameUI = new GameUI();
 			// Set initial scene
-			UISystem.SetScene(gameUI, null);
-			//Run the scene.
-			Director.Instance.RunWithScene(gameScene, true);
+			UISystem.SetScene(new MenuUI(), null);
+			// Run the scene.
+			Director.Instance.RunWithScene(new Sce.PlayStation.HighLevel.GameEngine2D.Scene(), true);
 		}
 
 		public static void Update()
@@ -76,8 +61,6 @@ namespace Flabola
 			
 			// Update scene director
 			Director.Instance.Update();
-			
-			gameScene.Update();
 
 			// Update UI Toolkit
 			UISystem.Update(touchDataList);
@@ -104,22 +87,6 @@ namespace Flabola
 		{
 			get{ return quit; }
 			set{ quit = value; }
-		}
-		
-		public static MenuUI MenuSceneUI
-		{
-			get{ return menuUI; }
-		}
-		
-		public static GameUI GameSceneUI
-		{
-			get{ return gameUI; }
-		}
-		
-		public static GameScene GameScene
-		{
-			get{ return gameScene; }
-			set{ gameScene = value; }
 		}
 		
 		public static int ScreenWidth

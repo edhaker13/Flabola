@@ -57,11 +57,19 @@ namespace Flabola
 			this.RootWidget.AddChildLast(buttonsPanel);
 		}
 		
+		~MenuUI()
+		{
+			playButton.Dispose();
+			exitButton.Dispose();
+			highscoreButton.Dispose();
+		}
+		
 		public static void HandleButtonPress(object sender, TouchEventArgs e)
 		{
 			if(sender == playButton)
 			{
-				UISystem.SetScene(AppMain.GameSceneUI, null);
+				UISystem.SetScene(new GameUI());
+				Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene(new GameScene());
 			}
 			else if(sender == exitButton)
 			{
