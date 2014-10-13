@@ -1,5 +1,4 @@
 using System;
-using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
@@ -24,28 +23,29 @@ namespace Flabola
 			// Create the player
 			player = new Player(this);
 			//this.AddChild(spriteList);
-		}
-		
-		public void Update()
-		{
-			// If tap on screen, tell player
-			if(Touch.GetData(0).Count > 0)
-			{
-				player.Tapped();
-			}
-			
-			// Update player if alive
-			if (player.IsAlive)
-			{
-				background.Update(.0f);
-				foreach(Obstacle obstacle in obstacles)
+			this.Schedule( (dt) => {				
+				// Update player if alive
+				if (player.IsAlive)
 				{
-					obstacle.Update(.0f);
+					background.Update(.0f);
+					foreach(Obstacle obstacle in obstacles)
+					{
+						obstacle.Update(.0f);
+					}
 				}
-			}
-			else
+				else
+				{
+					AppMain.Quit = true;
+				}
+			});
+		}
+		~GameScene()
+		{
+			player.Dispose();
+			background.Dispose();
+			foreach(Obstacle obstacle in obstacles)
 			{
-				AppMain.Quit = true;
+				obstacle.Dispose();
 			}
 		}
 	}
