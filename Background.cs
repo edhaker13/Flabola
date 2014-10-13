@@ -54,12 +54,11 @@ namespace Flabola
 		
 		public void Update(float deltaTime)
 		{			
-			sprites[0].Position = new Vector2(sprites[0].Position.X - 0.5f, sprites[0].Position.Y);
-			sprites[1].Position = new Vector2(sprites[1].Position.X - 0.5f, sprites[1].Position.Y);
-			sprites[2].Position = new Vector2(sprites[2].Position.X - 0.5f, sprites[2].Position.Y);
+			sprites[0].Position = new Vector2(sprites[0].Position.X - 1f, sprites[0].Position.Y);
+			sprites[1].Position = new Vector2(sprites[1].Position.X - 1f, sprites[1].Position.Y);
+			sprites[2].Position = new Vector2(sprites[2].Position.X - 1f, sprites[2].Position.Y);
 			
-			//Move the background.
-			//Left
+			//Move the background: Left
 			if(sprites[0].Position.X < -width)
 				sprites[0].Position = new Vector2(sprites[2].Position.X + width, 0.0f);
 			else
