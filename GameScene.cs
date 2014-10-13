@@ -15,7 +15,6 @@ namespace Flabola
 		public GameScene(): base()
 		{
 			this.Camera.SetViewFromViewport();
-			//spriteList = new SpriteList();
 			// Create the background
 			background = new ScrollingBackground(this);
 			// Create obstacles
@@ -46,7 +45,7 @@ namespace Flabola
 			}
 			else
 			{
-				//AppMain.Quit = true;
+				AppMain.Quit = true;
 			}
 		}
 	}
