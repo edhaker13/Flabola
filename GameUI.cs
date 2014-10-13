@@ -10,14 +10,15 @@ namespace Flabola
 		public GameUI(): base()
 		{
 			this.Title = "Menu UI";
+			this.Transition = new CrossFadeTransition();
 			// Create a score label
 			score = new Label();
 			score.Text = AppMain.PlayerScore.ToString();
-			score.TextColor = new UIColor(.5f, .5f, 1.0f, 1.0f);
+			score.TextColor = new UIColor(.5f, .5f, .5f, 1.0f);
 			score.HorizontalAlignment = HorizontalAlignment.Center;
 			score.VerticalAlignment = VerticalAlignment.Middle;
 			score.X = AppMain.ScreenWidth * .5f - (score.Width / 2);
-			score.Y = AppMain.ScreenHeight * .1f - (score.Height / 2);
+			score.Y = AppMain.ScreenHeight * .05f - (score.Height / 2);
 			
 			this.RootWidget.AddChildLast(score);
 		}
