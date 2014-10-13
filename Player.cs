@@ -29,17 +29,16 @@ namespace Flabola
 		// Public functions.
 		public Player(Scene scene)
 		{
-			textureInfo = new TextureInfo("/Application/assets/player-sprite.png");
+			textureInfo = new TextureInfo(new Texture2D("/Application/assets/player-spritemap.png", false), new Vector2i(9,1));
 			sprite = new SpriteTile(textureInfo);
 			sprite.Position = new Vector2(AppMain.ScreenWidth * .2f, AppMain.ScreenHeight * .5f);
-			sprite.Quad.S = textureInfo.TextureSizef * 2.0f;
-			sprite.Pivot = new Vector2(.5f, .5f);
+			sprite.Quad.S = textureInfo.TileSizeInPixelsf;
 			isAlive = true;
 			moveState = MoveStatus.Disabled;
 			rotateAngle = .0f;
-			
+			// Create update fucntion
 			sprite.Schedule( (dt) =>
-            {
+			               {
 				Vector2 pos = sprite.Position;
 				// Check collision with floor
 				if(pos.Y < 0)
@@ -66,8 +65,20 @@ namespace Flabola
 					rotateAngle = -dt;
 					break;
 				}
-				sprite.Rotate(rotateAngle);
+				//sprite.CenterSprite(TRS.Local.Center);
+				sprite.Rotation = Vector2.Rotation(rotateAngle);	
 			});
+			
+			// Create animation function
+			sprite.ScheduleInterval( (dt) => 
+			                       {
+				if(IsAlive)
+				{
+					int tileIndex = sprite.TileIndex1D + 1 < 8 ? sprite.TileIndex1D + 1 : 0;
+					sprite.TileIndex1D = tileIndex;
+				}
+			}, 0.3f);
+			
 			// Add to the current scene.
 			scene.AddChild(sprite);
 		}
