@@ -85,9 +85,19 @@ namespace Flabola
 			return randomPosition;
 		}
 		
-		public bool HasCollidedWith(SpriteUV sprite)
+		public bool HasCollidedWith(SpriteBase sprite)
 		{
-			return false;
+			Bounds2 topRect = sprites[0].GetlContentLocalBounds();
+			sprites[0].GetContentWorldBounds(ref topRect);
+			Bounds2 botRect = sprites[1].GetlContentLocalBounds();
+			sprites[1].GetContentWorldBounds(ref botRect);
+			Bounds2 spriteRect = sprite.GetlContentLocalBounds();
+			sprite.GetContentWorldBounds(ref spriteRect);
+			
+			bool isTopCollision = topRect.Overlaps(spriteRect);
+			bool isBottomCollision = botRect.Overlaps(spriteRect);
+			
+			return isTopCollision || isBottomCollision;			
 		}
 	}
 }

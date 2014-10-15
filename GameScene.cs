@@ -31,6 +31,8 @@ namespace Flabola
 					foreach(Obstacle obstacle in obstacles)
 					{
 						obstacle.Update(.0f);
+						if (obstacle.HasCollidedWith(player.Sprite))
+							player.IsAlive = false;
 					}
 				}
 				else

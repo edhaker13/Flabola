@@ -17,13 +17,13 @@ namespace Flabola
 	public class Player
 	{
 		// Private variables.
-		private static SpriteTile sprite;
+		private SpriteTile sprite;
 		private static TextureInfo textureInfo;
 		private static readonly float pushAmount = 5.0f;
 		private static readonly float maxPushAmount = 100.0f;
-		private static float yPositionBeforePush, rotateAngle;
-		private static bool isAlive;
-		private static MoveStatus moveState;
+		private float yPositionBeforePush, rotateAngle;
+		private bool isAlive;
+		private MoveStatus moveState;
 		
 		// Public functions.
 		public Player(Scene scene)
@@ -116,6 +116,11 @@ namespace Flabola
 				moveState = MoveStatus.Up;
 				yPositionBeforePush = sprite.Position.Y;
 			}
+		}
+		
+		public SpriteTile Sprite
+		{
+			get { return sprite; }
 		}
 	}
 }
