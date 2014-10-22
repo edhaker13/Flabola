@@ -11,6 +11,7 @@ namespace Flabola
 		{			
 			// Set the scene title
 			this.Title = "Menu UI";
+			this.Transition = new SlideTransition();
 			
 			// Create title panel
 			Panel titlePanel = new Panel();
@@ -18,7 +19,7 @@ namespace Flabola
 			
 			// Create title text
 			Label titleLabel = new Label();
-			titleLabel.Text = "Good Luck, Ebola-chan!";
+			titleLabel.Text = "Good Luck, Ebola-kun!";
 			titleLabel.SetPosition(AppMain.ScreenWidth * .37f, AppMain.ScreenHeight * .2f);
 			titleLabel.Width = AppMain.ScreenWidth * .5f;
 			titlePanel.AddChildLast(titleLabel);
