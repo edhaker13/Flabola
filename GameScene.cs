@@ -22,39 +22,45 @@ namespace Flabola
 			obstacles[1] = new Obstacle(AppMain.ScreenWidth, this);
 			// Create the player
 			player = new Player(this);
-			//this.AddChild(spriteList);
-			this.Schedule( (dt) => {				
-				// Update player if alive
-				if (player.IsAlive)
+			// Attach update function to Director scheduler
+			this.ScheduleUpdate();
+		}
+		
+		public override void Update(float dt)
+		{
+			base.Update(dt);
+			// Update player if alive
+			if (player.IsAlive)
+			{
+				foreach(Obstacle obstacle in obstacles)
 				{
-					background.Update(.0f);
-					foreach(Obstacle obstacle in obstacles)
+					if (obstacle.isCollidingWith(player.Sprite))
 					{
-						obstacle.Update(.0f);
-						if (obstacle.isCollidingWith(player.Sprite))
+						player.IsAlive = false;
+					}
+					else
+					{
+						if (obstacle.isInsideGap(player.Sprite))
 						{
-							player.IsAlive = false;
+							obstacle.IsGapOccupied = true;
 						}
-						else
+						else if(obstacle.IsGapOccupied)
 						{
-							if (obstacle.isInsideGap(player.Sprite))
-							{
-								obstacle.IsGapOccupied = true;
-							}
-							else if(obstacle.IsGapOccupied)
-							{
-								obstacle.IsGapOccupied = false;
-								AppMain.PlayerScore += 1;
-							}
+							obstacle.IsGapOccupied = false;
+							AppMain.PlayerScore += 1;
 						}
 					}
 				}
-				else
+			}
+			else
+			{
+				if(player.IsDead)
 				{
-					AppMain.Quit = true;
+					Director.Instance.Pause();
 				}
-			});
+			}
 		}
+		
 		~GameScene()
 		{
 			player.Dispose();

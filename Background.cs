@@ -45,6 +45,9 @@ namespace Flabola
 			//Add to the current scene.
 			foreach(SpriteUV sprite in sprites)
 				scene.AddChild(sprite);
+			
+			sprites[0].Schedule(Update);
+			//sprites[1].Schedule(Update);
 		}
 		
 		public void Dispose()
@@ -52,7 +55,7 @@ namespace Flabola
 			textureInfo.Dispose();
 		}
 		
-		public void Update(float deltaTime)
+		public void Update(float dt)
 		{			
 			sprites[0].Position = new Vector2(sprites[0].Position.X - 1f, sprites[0].Position.Y);
 			sprites[1].Position = new Vector2(sprites[1].Position.X - 1f, sprites[1].Position.Y);
