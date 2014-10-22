@@ -56,6 +56,7 @@ namespace Flabola
 			{
 				if(player.IsDead)
 				{
+					Sce.PlayStation.HighLevel.UI.UISystem.SetScene(new DeathUI());
 					Director.Instance.Pause();
 				}
 			}
