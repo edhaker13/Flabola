@@ -11,24 +11,24 @@ namespace Flabola
 	public class ScrollingBackground
 	{	
 		// Private variables.
-		private SpriteUV[] sprites;
+		private SpriteTile[] sprites;
 		private TextureInfo	textureInfo;
 		private float width;
 		
 		// Public functions.
 		public ScrollingBackground(Scene scene)
 		{
-			sprites = new SpriteUV[3];
+			sprites = new SpriteTile[3];
 			
 			textureInfo = new TextureInfo("/Application/assets/background.png");
 			//Left
-			sprites[0] = new SpriteUV(textureInfo);
+			sprites[0] = new SpriteTile(textureInfo);
 			sprites[0].Quad.S = textureInfo.TextureSizef;
 			//Middle
-			sprites[1] = new SpriteUV(textureInfo);
+			sprites[1] = new SpriteTile(textureInfo);
 			sprites[1].Quad.S = textureInfo.TextureSizef;
 			//Right
-			sprites[2] = new SpriteUV(textureInfo);
+			sprites[2] = new SpriteTile(textureInfo);
 			sprites[2].Quad.S = textureInfo.TextureSizef;
 			
 			//Get sprite bounds.
@@ -43,7 +43,7 @@ namespace Flabola
 			sprites[2].Position = new Vector2(sprites[1].Position.X + width, 0.0f);
 			
 			//Add to the current scene.
-			foreach(SpriteUV sprite in sprites)
+			foreach(SpriteTile sprite in sprites)
 				scene.AddChild(sprite);
 			
 			sprites[0].Schedule(Update);
