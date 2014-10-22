@@ -17,10 +17,7 @@ namespace Flabola
 		private static int screenWidth, screenHeight;
 		private static int playerScore;
 		private static bool quit;
-		//private static MenuUI menuUI;
-		//private static GameUI gameUI;
-		//private static HighscoreUI highscoreUI;
-		//private static GameScene gameScene;
+		private static Dictionary<string, int> highScoresMap;
 		
 		public static void Main(string[] args)
 		{
@@ -47,8 +44,8 @@ namespace Flabola
 			screenWidth = UISystem.FramebufferWidth;
 			screenHeight = UISystem.FramebufferHeight;
 			// Set initial scene
-			UISystem.SetScene(new MenuUI(), null);
-			// Run the scene.
+			UISystem.SetScene(new MenuUI());
+			// Run the scene
 			Director.Instance.RunWithScene(new Sce.PlayStation.HighLevel.GameEngine2D.Scene(), true);
 		}
 
@@ -99,15 +96,22 @@ namespace Flabola
 			get{ return screenHeight; }
 		}
 		
-		private static bool InsideRect(float pixelX, float pixelY, Rectangle hitTestArea)
+		public static Dictionary<string, int> HighScores
+		{
+			get
+			{ 
+				if (highScoresMap.Count == 0)
+				{
+					//loadHighScores();
+				}
+				return highScoresMap; 
+			}
+		   	set{ highScoresMap = value; }
+		}
+		
+		private static void loadHighScore()
 		{
 			
-			if(hitTestArea.X <= pixelX && hitTestArea.X + hitTestArea.Width >= pixelX &&
-	            hitTestArea.Y <= pixelY && hitTestArea.Y + hitTestArea.Height >= pixelY) {
-				return true;
-			}
-	
-			return false;
 		}
 	}
 }
