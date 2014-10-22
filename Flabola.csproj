@@ -41,12 +41,9 @@
     <Content Include="assets\exit.png" />
     <Content Include="assets\highscore.png" />
     <Content Include="assets\play.png" />
-    <Content Include="assets\player-sprite.png" />
-    <Content Include="assets\player-spritemap-v9-greypants.png" />
     <Content Include="assets\player-spritemap.png" />
     <Content Include="assets\background.png" />
-    <Content Include="assets\bottompipe.png" />
-    <Content Include="assets\toppipe.png" />
+    <Content Include="assets\zombie_pipes.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
   <ItemGroup>
@@ -71,5 +68,6 @@
     <Compile Include="Background.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="DeathUI.cs" />
   </ItemGroup>
 </Project>
